@@ -10,7 +10,7 @@ namespace banking {
 
         //Property of SavingsComp instance is this instance account of Account class
         private Account account = new Account();
-        //
+        //Property of SavingsComp 
         public decimal InterestRate { get; set; } = 0.12m;
         //
         public string AccountId {

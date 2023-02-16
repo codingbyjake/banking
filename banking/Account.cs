@@ -32,12 +32,17 @@ namespace banking {
                 Console.WriteLine($"Amount cannot excede account balance.");
                 return false;
             }
-
             Balance -= Amount;
             return true;
         }
+
         //method to transfer amount to account
-        public bool Transfer(decimal Amount, Account ToAccount) {
+        public bool Transfer(decimal Amount, Account ToAccount) {           
+            if (Withdraw(Amount)) {
+                ToAccount.Deposit(Amount);
+                return true;
+            }
+            return false;
             //***********following code removed: refactoring #1***********
             //if (Amount <= 0) {
             //    Console.WriteLine($"Amount cannot be zero or a negative number.");
@@ -47,12 +52,6 @@ namespace banking {
             //if (!success) {
             //    return false;
             //}
-
-            if (Withdraw(Amount)) {
-                ToAccount.Deposit(Amount);
-                return true;
-            }
-            return false;
         }
 
 
