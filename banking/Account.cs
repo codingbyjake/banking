@@ -1,4 +1,5 @@
-﻿using System;
+﻿using banking.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -15,8 +16,9 @@ namespace banking {
         //method to deposit amount into account
         public bool Deposit(decimal Amount) {
             if (Amount <= 0) {
-                Console.WriteLine($"Amount cannot be zero or a negative number.");
-                return false;
+                //Console.WriteLine($"Amount cannot be zero or a negative number.");
+                //return false;
+                throw new CantBeZeroException($"Exception: Amount can't be less than or equal to zero");
             }
             Balance += Amount;
             return true;
@@ -25,12 +27,13 @@ namespace banking {
         //method to withdraw amount from account
         public bool Withdraw(decimal Amount) {
             if (Amount <= 0) {
-                Console.WriteLine($"Amount cannot be zero or a negative number.");
-                return false;
+                //Console.WriteLine($"Amount cannot be zero or a negative number.");
+                //return false;
+                throw new CantBeZeroException($"Exception: Amount can't be less than or equal to zero");
+
             }
             if (Amount  > Balance) {
-                Console.WriteLine($"Amount cannot excede account balance.");
-                return false;
+                throw new InsufficientFundsException($"Exception: Insufficient Funds!", Amount, Balance);
             }
             Balance -= Amount;
             return true;
